@@ -27,7 +27,7 @@ $apiClient = new ApiClient(TOKEN);
 
 try
 {
-    $filesList = $apiClient->FileList();
+    $filesList = $apiClient->FilesList();
 } catch (ApiErrorException $e)
 {
     // Api returned structure of error
