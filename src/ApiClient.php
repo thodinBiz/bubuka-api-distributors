@@ -222,7 +222,7 @@ class ApiClient implements ApiClientInterface
      */
     public function UsersGet($id)
     {
-        $response = $this->sendRequest(self::PATH_USERS_GET . $id, self::REQUEST_GET);
+        $response = $this->sendRequest(self::PATH_USERS_GET . rawurlencode($id), self::REQUEST_GET);
 
         if (isset($response->data->result->user)) {
             return $response->data->user;
@@ -269,7 +269,7 @@ class ApiClient implements ApiClientInterface
      */
     public function UsersUpdate($id, $name, $subscriptionStartDate, $subscriptionEndDate)
     {
-        $response = $this->sendRequest(self::PATH_USERS_UPDATE . $id, self::REQUEST_POST, [
+        $response = $this->sendRequest(self::PATH_USERS_UPDATE . rawurlencode($id), self::REQUEST_POST, [
             'name'                    => $name,
             'subscription_start_date' => $subscriptionStartDate,
             'subscription_end_date'   => $subscriptionEndDate,
@@ -332,7 +332,7 @@ class ApiClient implements ApiClientInterface
      */
     public function ObjectsGet($id)
     {
-        $response = $this->sendRequest(self::PATH_OBJECTS_GET . $id, self::REQUEST_GET);
+        $response = $this->sendRequest(self::PATH_OBJECTS_GET . rawurlencode($id), self::REQUEST_GET);
 
         if (isset($response->data->result->object)) {
             return $response->data->object;
@@ -388,7 +388,7 @@ class ApiClient implements ApiClientInterface
      */
     public function ObjectsUpdate($id, $name, $country, $city, $address, $subscriptionStartDate, $subscriptionEndDate)
     {
-        $response = $this->sendRequest(self::PATH_OBJECTS_UPDATE . $id, self::REQUEST_POST, [
+        $response = $this->sendRequest(self::PATH_OBJECTS_UPDATE . rawurlencode($id), self::REQUEST_POST, [
             'id'                      => $id,
             'name'                    => $name,
             'country'                 => $country,
