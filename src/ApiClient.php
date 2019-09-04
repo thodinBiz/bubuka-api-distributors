@@ -177,7 +177,7 @@ class ApiClient implements ApiClientInterface
      * @throws ResponseException
      * @throws ApiErrorException
      */
-    public function FileList($page = 1, $limit = 100)
+    public function FilesList($page = 1, $limit = 100)
     {
         $response = $this->sendRequest(self::PATH_FILES_LIST, self::REQUEST_GET,
             [

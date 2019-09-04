@@ -15,7 +15,7 @@ $page = 1;
 $limit = 501;
 
 try {
-    $filesList = $apiClient->FileList($page, $limit);
+    $filesList = $apiClient->FilesList($page, $limit);
 } catch (ApiErrorException $e) {
     // Api returned structure of error
 } catch (ResponseException $e) {

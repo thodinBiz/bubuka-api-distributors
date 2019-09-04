@@ -12,7 +12,7 @@ interface ApiClientInterface
 {
     public function __construct($token, $apiBaseURL);
 
-    public function FileList($page = 1, $limit = 100);
+    public function FilesList($page = 1, $limit = 100);
 
     public function UsersList($page = 1, $limit = 100);
 
