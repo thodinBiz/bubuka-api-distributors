@@ -7,6 +7,8 @@ https://test.my.bubuka.info/api/dst/doc.html
 
 ```$xslt
 
+require_once './vendor/autoload.php';
+
 use Bubuka\Distributors\RestAPI\Exceptions\ApiErrorException;
 use Bubuka\Distributors\RestAPI\Exceptions\ResponseException;
 use Bubuka\Distributors\RestAPI\ApiClient;
@@ -17,15 +19,16 @@ const TOKEN = '2b3f2d3e2c01a60c234c393214a17133';
 // $client = new ApiClient(TOKEN, API_URL);
 $apiClient = new ApiClient(TOKEN);
 
-try{
-    $filsList = $apiClient->FileList();
-} catch ($e ApiErrorException)
+try
 {
-    // Api returned structure of error 
-} catch ($e ResponseException)
+    $filesList = $apiClient->FileList();
+} catch (ApiErrorException $e)
+{
+    // Api returned structure of error
+} catch (ResponseException $e)
 {
     // 500 error, server unavailable, etc.
 }
 
-var_dump($fileList);
+var_dump($filesList);
 ```

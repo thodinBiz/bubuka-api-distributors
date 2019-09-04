@@ -10,7 +10,6 @@ namespace Bubuka\Distributors\RestAPI;
 
 use Bubuka\Distributors\RestAPI\Exceptions\ApiErrorException;
 use Bubuka\Distributors\RestAPI\Exceptions\ResponseException;
-
 use stdClass;
 
 /**
