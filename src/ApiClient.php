@@ -79,21 +79,27 @@ class ApiClient implements ApiClientInterface
     {
         $url = $this->apiUrl . '/' . $path;
         $method = strtoupper($method);
+        $headers = [];
+
         $curl = curl_init();
 
-        if ($useToken && !empty($this->token)) {
-            $headers = ['Token: ' . $this->token];
-            curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+        if ($useToken && !empty($this->token))
+        {
+            $headers[] = 'Token: ' . $this->token;
         }
 
-        switch ($method) {
+        switch ($method)
+        {
             case self::REQUEST_POST:
-                if (is_array($data)) {
+                if (is_array($data))
+                {
                     curl_setopt($curl, CURLOPT_POST, count($data));
                     curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
-                } elseif (is_string($data)) {
-                    curl_setopt($curl, CURLOPT_POST, strlen($data));
+                } elseif (is_string($data) && (boolean)strlen($data))
+                {
+                    curl_setopt($curl, CURLOPT_POST, true);
                     curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+                    $headers[] = 'Content-Type: text/plain';
                 }
                 break;
             case self::REQUEST_PUT:
@@ -105,12 +111,14 @@ class ApiClient implements ApiClientInterface
                 curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
                 break;
             default:
-                if (!empty($data)) {
+                if (!empty($data))
+                {
                     $url .= '?' . http_build_query($data);
                 }
         }
 
         curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -155,8 +163,7 @@ class ApiClient implements ApiClientInterface
         if (isset($retVal->data->error, $retVal->data->error->code, $retVal->data->error->message)) {
             throw new ApiErrorException($retVal->data->error->message, $retVal->data->error->code);
         } else {
-            throw new ResponseException('Server return success ' . var_dump($retVal->data->success)
-                . ' but not present error structure', 500);
+            throw new ResponseException('API return success!==true, but not presented the structure of error', 500);
         }
     }
 
@@ -164,7 +171,7 @@ class ApiClient implements ApiClientInterface
      * @see http://test.my.bubuka.info/api/dst/doc.html#FilesList
      *
      * @param int $page
-     * @param int $limit
+     * @param int $limit max 500
      *
      * @return stdClass
      * @throws ResponseException
