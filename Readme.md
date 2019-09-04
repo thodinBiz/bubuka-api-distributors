@@ -3,9 +3,15 @@ BUBUKA API for Distributors 0.1.0
 
 https://test.my.bubuka.info/api/dst/doc.html
 
+**Composer Installation**
+
+```shell script
+composer require thodinbiz/bubuka-api-for-distributors
+```
+
 **Usage examples**
 
-```$xslt
+```php
 
 require_once './vendor/autoload.php';
 
