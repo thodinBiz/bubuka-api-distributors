@@ -10,7 +10,7 @@ namespace Bubuka\Distributors\RestAPI;
 
 interface ApiClientInterface
 {
-    public function __construct($token, $apiBaseURL);
+    public function __construct($token, $apiBaseURL = null);
 
     public function FilesList($page = 1, $limit = 100);
 
