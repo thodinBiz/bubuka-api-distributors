@@ -435,6 +435,8 @@ class ApiClient implements ApiClientInterface
     }
 
     /**
+     * @see http://test.my.bubuka.info/api/dst/doc.html#PlaylistsList
+     *
      * @param int $page
      * @param int $limit
      *
@@ -458,6 +460,8 @@ class ApiClient implements ApiClientInterface
     }
 
     /**
+     * @see http://test.my.bubuka.info/api/dst/doc.html#PlaylistsGet
+     *
      * @param string $id
      * @param int    $page
      * @param int    $limit
