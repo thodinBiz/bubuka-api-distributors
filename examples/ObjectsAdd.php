@@ -9,6 +9,7 @@
 require_once 'init.php';
 
 use Bubuka\Distributors\RestAPI\Exceptions\ApiErrorException;
+use Bubuka\Distributors\RestAPI\Exceptions\BubukaException;
 use Bubuka\Distributors\RestAPI\Exceptions\ResponseException;
 
 $place = [
@@ -25,10 +26,7 @@ try {
     if ($apiClient->ObjectsAdd($place['id'], $place['name'], $place['country'], $place['city'], $place['address'], $place['subscriptionStartDate'], $place['subscriptionEndDate'])) {
         echo "\nObject was created\n";
     }
-} catch (ApiErrorException $e) {
+} catch (BubukaException $e) {
     // Api returned structure of error
     echo 'ApiErrorException: ' . $e->getMessage() . "\n";
-} catch (ResponseException $e) {
-    // 500 error, server unavailable, etc.
-    echo 'ResponseException: ' . $e->getMessage() . "\n";
 }

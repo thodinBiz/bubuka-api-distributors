@@ -8,7 +8,14 @@
 
 require_once 'init.php';
 
-use Bubuka\Distributors\RestAPI\Exceptions\ApiErrorException;
-use Bubuka\Distributors\RestAPI\Exceptions\ResponseException;
+use Bubuka\Distributors\RestAPI\Exceptions\BubukaException;
 
-var_dump($apiClient->ObjectsList());
+try {
+
+    var_dump($apiClient->ObjectsList());
+
+} catch (BubukaException $e) {
+    // Api returned structure of error
+    echo 'BubukaException: ' . $e->getMessage() . "\n";
+}
+
