@@ -14,4 +14,4 @@ const API_URL = 'http://test.my.bubuka.info/api/dst/';
 const TOKEN = '2b3f2d3e2c01a60c234c393214a17133';
 const OBJECT_ID = 'gusliTestPlace';
 
-$apiClient = new ApiClient(TOKEN);
+$apiClient = new ApiClient(TOKEN, API_URL);

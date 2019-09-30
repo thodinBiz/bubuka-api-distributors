@@ -9,6 +9,7 @@
 namespace Bubuka\Distributors\RestAPI;
 
 use Bubuka\Distributors\RestAPI\Exceptions\ApiErrorException;
+use Bubuka\Distributors\RestAPI\Exceptions\InvalidRequestException;
 use Bubuka\Distributors\RestAPI\Exceptions\ResponseException;
 use stdClass;
 
@@ -34,11 +35,17 @@ class ApiClient implements ApiClientInterface
     const PATH_OBJECTS_UPDATE = 'objects/update/';
     const PATH_OBJECTS_STATISTICS = 'objects/statistics';
 
+    const PATH_PLAYLISTS_LIST = 'playlists/list';
+    const PATH_PLAYLISTS_GET = 'playlists/get/';
+
     const HTTP_OK = 200;
     const REQUEST_GET = 'GET';
     const REQUEST_POST = 'POST';
     const REQUEST_PUT = 'PUT';
     const REQUEST_DELETE = 'DELETE';
+
+    const MAX_LIMIT = 100;
+    const MIN_LIMIT = 1;
 
     /**
      * @var string
@@ -171,9 +178,15 @@ class ApiClient implements ApiClientInterface
      * @return stdClass
      * @throws ResponseException
      * @throws ApiErrorException
+     * @throws InvalidRequestException
      */
     public function FilesList($page = 1, $limit = 100)
     {
+
+        if ($limit > self::MAX_LIMIT || $limit < self::MIN_LIMIT) {
+            throw new InvalidRequestException('Invalid request: limit must be between ' . self::MIN_LIMIT . ' and ' . self::MAX_LIMIT);
+        }
+
         $response = $this->sendRequest(self::PATH_FILES_LIST, self::REQUEST_GET,
             [
                 'page'  => $page,
@@ -419,5 +432,57 @@ class ApiClient implements ApiClientInterface
             json_encode($statistics, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
 
         return $response->data->success;
+    }
+
+    /**
+     * @param int $page
+     * @param int $limit
+     *
+     * @return mixed
+     * @throws ApiErrorException
+     * @throws ResponseException
+     */
+    public function PlaylistsList($page = 1, $limit = 100)
+    {
+        $response = $this->sendRequest(self::PATH_PLAYLISTS_LIST, self::REQUEST_GET,
+            [
+                'page'  => $page,
+                'limit' => $limit,
+            ]);
+
+        if (isset($response->data->result->playlists)) {
+            return $response->data->result;
+        } else {
+            throw new ResponseException('Invalid response format');
+        }
+    }
+
+    /**
+     * @param string $id
+     * @param int    $page
+     * @param int    $limit
+     *
+     * @return mixed
+     * @throws ApiErrorException
+     * @throws InvalidRequestException
+     * @throws ResponseException
+     */
+    public function PlaylistsGet($id, $page = 1, $limit = 100)
+    {
+        if ($limit > self::MAX_LIMIT || $limit < self::MIN_LIMIT) {
+            throw new InvalidRequestException('Invalid request: limit must be between ' . self::MIN_LIMIT . ' and ' . self::MAX_LIMIT);
+        }
+
+        $response = $this->sendRequest(self::PATH_PLAYLISTS_GET . rawurlencode($id), self::REQUEST_GET,
+            [
+                'page'  => $page,
+                'limit' => $limit,
+            ]);
+
+        if (isset($response->data->result->files)) {
+            return $response->data->result;
+        } else {
+            throw new ResponseException('Invalid response format');
+        }
     }
 }

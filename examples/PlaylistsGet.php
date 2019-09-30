@@ -2,25 +2,22 @@
 /**
  * Created by PhpStorm.
  * User: Thodin
- * Date: 04.09.2019
- * Time: 14:52
+ * Date: 30.09.2019
+ * Time: 16:51
  */
-
-require_once 'init.php';
 
 use Bubuka\Distributors\RestAPI\Exceptions\BubukaException;
 
+require_once 'init.php';
+
+const PLAYLIST_ID = 1;
 $page = 1;
-$limit = 501;
+$limit = 2;
 
 try {
-    $filesList = $apiClient->FilesList($page, $limit);
+    $playlistTracks = $apiClient->PlaylistsGet(PLAYLIST_ID, $page, $limit);
 
-    foreach ($filesList->files as $file) {
-        var_dump($file);
-    }
-
-    echo "\nFiles on page\n" . count($filesList->files);
+    var_dump($playlistTracks);
 
 } catch (BubukaException $e) {
     // Api returned structure of error

@@ -28,5 +28,5 @@ try {
     }
 } catch (BubukaException $e) {
     // Api returned structure of error
-    echo 'ApiErrorException: ' . $e->getMessage() . "\n";
+    echo 'BubukaException: ' . $e->getMessage() . "\n";
 }
