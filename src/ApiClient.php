@@ -83,20 +83,16 @@ class ApiClient implements ApiClientInterface
 
         $curl = curl_init();
 
-        if ($useToken && !empty($this->token))
-        {
+        if ($useToken && !empty($this->token)) {
             $headers[] = 'Token: ' . $this->token;
         }
 
-        switch ($method)
-        {
+        switch ($method) {
             case self::REQUEST_POST:
-                if (is_array($data))
-                {
+                if (is_array($data)) {
                     curl_setopt($curl, CURLOPT_POST, count($data));
                     curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
-                } elseif (is_string($data) && (boolean)strlen($data))
-                {
+                } elseif (is_string($data) && (boolean)strlen($data)) {
                     curl_setopt($curl, CURLOPT_POST, true);
                     curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
                     $headers[] = 'Content-Type: text/plain';
@@ -111,8 +107,7 @@ class ApiClient implements ApiClientInterface
                 curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
                 break;
             default:
-                if (!empty($data))
-                {
+                if (!empty($data)) {
                     $url .= '?' . http_build_query($data);
                 }
         }
@@ -411,14 +406,14 @@ class ApiClient implements ApiClientInterface
     /**
      * @see http://test.my.bubuka.info/api/dst/doc.html#ObjectsStatistics
      *
-     * @param array $statistics array of
+     * @param \stdClass[] $statistics array of
      * { file_id: 21453, object_id: N7yMF1, playback_time: 237, datetime: 2019-09-03 09:01:05 }
      *
      * @return bool
      * @throws ResponseException
      * @throws ApiErrorException
      */
-    public function ObjectsStatistics($statistics)
+    public function ObjectsStatistics(array $statistics)
     {
         $response = $this->sendRequest(self::PATH_OBJECTS_STATISTICS, self::REQUEST_POST,
             json_encode($statistics, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));

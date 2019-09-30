@@ -32,5 +32,5 @@ interface ApiClientInterface
 
     public function ObjectsUpdate($id, $name, $country, $city, $address, $subscriptionStartDate, $subscriptionEndDate);
 
-    public function ObjectsStatistics($statistics);
+    public function ObjectsStatistics(array $statistics);
 }

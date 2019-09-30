@@ -1,5 +1,5 @@
 Простенькая библиотека для взаимодествия с 
-BUBUKA API for Distributors 0.1.0
+BUBUKA API for Distributors
 
 https://test.my.bubuka.info/api/dst/doc.html
 

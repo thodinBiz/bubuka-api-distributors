@@ -11,7 +11,7 @@ namespace Bubuka\Distributors\RestAPI\Exceptions;
 use Exception;
 
 /**
- * Class ResponseException
+ * Class BubukaException
  * @package Bubuka\Distributors\RestAPI
  */
 class BubukaException extends Exception

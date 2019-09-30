@@ -9,7 +9,7 @@
 namespace Bubuka\Distributors\RestAPI\Exceptions;
 
 /**
- * Class ResponseException
+ * Class ApiErrorException
  * @package Bubuka\Distributors\RestAPI
  */
 class ApiErrorException extends BubukaException
