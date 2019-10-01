@@ -8,9 +8,7 @@
 
 require_once 'init.php';
 
-use Bubuka\Distributors\RestAPI\Exceptions\ApiErrorException;
 use Bubuka\Distributors\RestAPI\Exceptions\BubukaException;
-use Bubuka\Distributors\RestAPI\Exceptions\ResponseException;
 
 $place = [
     'id'                    => OBJECT_ID,
