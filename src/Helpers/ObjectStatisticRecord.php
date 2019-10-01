@@ -17,7 +17,7 @@ namespace Bubuka\Distributors\RestAPI\Helpers;
  * @property integer $playback_time
  * @property string  $datetime
  */
-class ObjectStatisticRecord
+class ObjectStatisticRecord extends BaseObject
 {
 
 }

@@ -11,6 +11,8 @@ namespace Bubuka\Distributors\RestAPI;
 use Bubuka\Distributors\RestAPI\Exceptions\ApiErrorException;
 use Bubuka\Distributors\RestAPI\Exceptions\InvalidRequestException;
 use Bubuka\Distributors\RestAPI\Exceptions\ResponseException;
+use Bubuka\Distributors\RestAPI\Helpers\File;
+use Bubuka\Distributors\RestAPI\Helpers\Playlist;
 use stdClass;
 
 /**
@@ -453,6 +455,11 @@ class ApiClient implements ApiClientInterface
             ]);
 
         if (isset($response->data->result->playlists)) {
+
+            foreach ($response->data->result->playlists as &$playlist) {
+                $playlist = new Playlist($playlist);
+            }
+
             return $response->data->result;
         } else {
             throw new ResponseException('Invalid response format');
@@ -484,6 +491,11 @@ class ApiClient implements ApiClientInterface
             ]);
 
         if (isset($response->data->result->files)) {
+
+            foreach ($response->data->result->files as &$file) {
+                $file = new File($file);
+            }
+
             return $response->data->result;
         } else {
             throw new ResponseException('Invalid response format');
