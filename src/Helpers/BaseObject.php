@@ -17,7 +17,7 @@ class BaseObject
     /**
      * BaseObject constructor.
      *
-     * @param null $data
+     * @param iterable|object $data
      */
     public function __construct($data = null)
     {
