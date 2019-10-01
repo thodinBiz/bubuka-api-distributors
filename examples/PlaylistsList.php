@@ -15,9 +15,9 @@ $limit = 10;
 
 try {
     $playlistList = $apiClient->PlaylistsList($page, $limit);
+
+    print_r($playlistList);
 } catch (BubukaException $e) {
     // Api returned structure of error
     echo 'BubukaException: ' . $e->getMessage() . "\n";
 }
-
-var_dump($playlistList);

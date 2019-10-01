@@ -16,9 +16,7 @@ $limit = 501;
 try {
     $filesList = $apiClient->FilesList($page, $limit);
 
-    foreach ($filesList->files as $file) {
-        var_dump($file);
-    }
+    print_r($filesList);
 
     echo "\nFiles on page\n" . count($filesList->files);
 

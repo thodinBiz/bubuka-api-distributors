@@ -12,7 +12,7 @@ use Bubuka\Distributors\RestAPI\Exceptions\BubukaException;
 
 try {
 
-    var_dump($apiClient->ObjectsList());
+    print_r($apiClient->ObjectsList());
 
 } catch (BubukaException $e) {
     // Api returned structure of error

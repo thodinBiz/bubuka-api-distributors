@@ -15,9 +15,9 @@ $page = 1;
 $limit = 2;
 
 try {
-    $playlistTracks = $apiClient->PlaylistsGet(PLAYLIST_ID, $page, $limit);
+    $response = $apiClient->PlaylistsGet(PLAYLIST_ID, $page, $limit);
 
-    var_dump($playlistTracks);
+    print_r($response);
 
 } catch (BubukaException $e) {
     // Api returned structure of error
