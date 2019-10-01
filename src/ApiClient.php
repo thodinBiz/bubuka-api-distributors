@@ -421,7 +421,7 @@ class ApiClient implements ApiClientInterface
     /**
      * @see http://test.my.bubuka.info/api/dst/doc.html#ObjectsStatistics
      *
-     * @param \stdClass[] $statistics array of
+     * @param stdClass[] $statistics array of
      * { file_id: 21453, object_id: N7yMF1, playback_time: 237, datetime: 2019-09-03 09:01:05 }
      *
      * @return bool
