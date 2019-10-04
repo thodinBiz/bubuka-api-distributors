@@ -21,8 +21,10 @@ class BaseObject
      */
     public function __construct($data = null)
     {
-        foreach ($data as $k => $v) {
-            $this->{$k} = $v;
+        if ($data) {
+            foreach ($data as $k => $v) {
+                $this->{$k} = $v;
+            }
         }
     }
 }
